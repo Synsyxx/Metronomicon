@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './Metronomicon.css';
+import click1 from './click1.wav';
+import click2 from './click2.wav';
 
 class Metronomicon extends Component {
     constructor(props) { //initialize state here and use in render
@@ -11,12 +13,19 @@ class Metronomicon extends Component {
             bpm: 100,
             beatsPerMeasure: 4
         };
+
+        this.click1 = new Audio(click1);
+        this.click2 = new Audio(click2);
     }
     
     // Handler Function to make slider function
     handleBpmChange = event => {
         const bpm = event.target.value;
         this.setState({ bpm });
+    }
+
+    startStop = () => {
+        this.click1.play();
     }
 
     render() {
@@ -33,7 +42,9 @@ class Metronomicon extends Component {
                         value={bpm} 
                         onChange={this.handleBpmChange} />
                 </div>
-                <button>{playing ? 'Stop' : 'Start'}</button> 
+                <button onClick={this.startStop}>
+                    {playing ? 'Stop' : 'Start'}
+                </button> 
             </div>
         ); 
     }
