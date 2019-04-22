@@ -21,8 +21,22 @@ class Metronomicon extends Component {
     // Handler Function to make slider function
     handleBpmChange = event => {
         const bpm = event.target.value;
-        this.setState({ bpm });
-    }
+        
+        if (this.state.playing) {
+            // Stop the old timer and start a new one
+            clearInterval(this.timer);
+            this.timer = setInterval(this.playClick, (60 / bpm) * 1000);
+
+            // Set the new BPM, and reset the beat counter
+            this.setState({
+                count: 0,
+                bpm
+            });
+        } else {
+            // Otherwise just update the BPM
+            this.setState({ bpm });
+        }
+    };
 
     startStop = () => {
         if (this.state.playing) {
