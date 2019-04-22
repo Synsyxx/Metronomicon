@@ -2,9 +2,19 @@ import React, { Component } from 'react';
 import './Metronomicon.css';
 
 class Metronomicon extends Component {
+    constructor(props) { //initialize state here and use in render
+        super(props);
+
+        this.state = {
+            playing: false,
+            count: 0,
+            bpm: 100,
+            beatsPerMeasure: 4
+        };
+    }
+
     render() {
-        let bpm = 100; // initialize bpm variable at 100 beats per min
-        let playing = false; // prevent metronome from auto-start
+        const { playing, bpm } = this.state;
 
         return (
             <div className="metronome">
